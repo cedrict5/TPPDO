@@ -11,7 +11,7 @@
     $hostnom = 'host=srvmysql.btssio.dedyn.io';
     $usernom = 'TIANANO';
     $password = '05012006';
-    $bdd = 'biblio';
+    $bdd = 'TIANANO_Biblio';
     
     try {
         $monPdo = new PDO("mysql:$hostnom;dbname=$bdd;charset=utf8", $usernom, $password);
@@ -20,24 +20,6 @@
         echo $e->getMessage();
         $monPdo = null;
     }
-
-
-
-
-
-    $req->setFetchMode(PDO::FETCH_ASSOC);
-    $lesLignes=$req->fetchAll();
-    foreach($lesLignes as $laLigne){
-        echo "<tr>";
-        echo "<td>" . $laLigne['num'] . "</td>
-         <td>" . $laLigne['nom'] . "</td>
-         <td>" . $laLigne['prenom'] . "</td>
-         <td>" . $laLigne['nationalite'] . "</td>";
-        echo "</tr>";
-    }
-
-    
-
     ?>
 </body>
 </html>
