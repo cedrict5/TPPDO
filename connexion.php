@@ -20,7 +20,24 @@
         echo $e->getMessage();
         $monPdo = null;
     }
+
+
+
+
+
+    $req->setFetchMode(PDO::FETCH_ASSOC);
+    $lesLignes=$req->fetchAll();
+    foreach($lesLignes as $laLigne){
+        echo "<tr>";
+        echo "<td>" . $laLigne['num'] . "</td>
+         <td>" . $laLigne['nom'] . "</td>
+         <td>" . $laLigne['prenom'] . "</td>
+         <td>" . $laLigne['nationalite'] . "</td>";
+        echo "</tr>";
+    }
+
     
+
     ?>
 </body>
 </html>
