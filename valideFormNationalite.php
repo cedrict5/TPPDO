@@ -54,24 +54,34 @@
     
 <?php include('header.php');
 include('connexionPdo.php');
+$action = $_GET['action'];
 $num=$_POST['num']; //recup le formulaire
 $libelle=$_POST['libelle']; //recup le formulaire
 var_dump($libelle,$num);
+
+if ($action == "Modifier"){
 $req=$monPdo->prepare("update nationalite set libelle= :libelle where num = :num");
 $req->bindParam(':num', $num);
 $req->bindParam(':libelle', $libelle);
 $nb=$req->execute();
+}else{
+  $req=$monPdo->prepare("insert into nationalite(libelle) values(:libelle)");
+  $req->bindParam(':libelle', $libelle);
+}
+$nb=$req->execute();
+$message = $action=="Modifier"? "modifiée":"ajoutée";
+
 
 echo '<div class="container mt-5">';
 echo '<div class="row">
     <div class="col mt-5">';
 if($nb == 1){
     echo ' <div class="alert alert-success" role="alert">
-    La nationalité a bien été modifiée.
+    La nationalité a bien été $message.
     </div>';
 }else{
     echo ' <div class="alert alert-danger" role="alert">
-    La nationalité n\'a pas été modifiée!
+    La nationalité n\'a pas été $message!
     </div> ';
 }
 ?>
