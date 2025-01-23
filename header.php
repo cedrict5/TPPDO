@@ -24,8 +24,8 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-flag"></i>  Gestion des nationnalités</a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="listenationnalites.php">Liste des nationnalités</a>
-          <a class="dropdown-item" href="#">Ajouter une nationnalité</a>
+          <a class="dropdown-item" href="listenationalites.php">Liste des nationnalités</a>
+          <a class="dropdown-item" href="formAjoutNationalite.php">Ajouter une nationnalité</a>
         </div>
       </li>
     </ul>

@@ -67,7 +67,7 @@ $lesNationnalites= $req->fetchAll();
 
     <div class="row pt-3">
         <div class="col-9"><h2>Liste des nationnalités</h2></div>
-        <div class="col-3"><a href="" class='btn btn-success'><i class="fas fa-plus-circle"></i>Créer un nationnalité</a></div>
+        <div class="col-3"><a href="formAjoutNationalite.php" class="btn btn-success"><i class="fas fa-plus-circle"></i> Créer un nationnalité</a></div>
     </div>
     <table class="table table-hover table-stripped">
         <thead>
