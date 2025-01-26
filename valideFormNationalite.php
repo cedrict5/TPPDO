@@ -77,12 +77,11 @@ echo '<div class="row">
     <div class="col mt-5">';
 if($nb == 1){
     echo ' <div class="alert alert-success" role="alert">
-    La nationalité a bien été $message.
-    </div>';
+    La nationalité a bien été '. $message . '</div>';
 }else{
     echo ' <div class="alert alert-danger" role="alert">
-    La nationalité n\'a pas été $message!
-    </div> ';
+    La nationalité n\'a pas été '. $message . '</div>';
+    
 }
 ?>
     </div>
