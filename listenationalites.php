@@ -63,7 +63,7 @@
     
 <?php include('header.php');
 include('connexionPdo.php');
-$req=$monPdo->prepare("select * from nationalite");
+$req=$monPdo->prepare("select n.num, n.libelle as 'libNation', c.libelle as 'libContinent' from nationalite n, continent c where n.numContinent=c.id ");
 $req->setFetchMode(PDO::FETCH_OBJ);
 $req->execute();
 $lesNationnalites= $req->fetchAll();
@@ -96,6 +96,7 @@ if(!empty($_SESSION['message'])){
             <tr class="d-flex">
             <th scope="col" class="col-md-2">Numéro</th>
             <th scope="col" class="col-md-8">Libellé</th>
+            <th scope="col" class="col-md-8">Continent</th>
             <th scope="col" class="col-md-2">Actions</th>
             </tr>
         </thead>
@@ -104,7 +105,8 @@ if(!empty($_SESSION['message'])){
             foreach($lesNationnalites as $nationalite){
                 echo"<tr class='d-flex'>";
                 echo"<td class='col-md-2'>$nationalite->num</td>";
-                echo"<td class='col-md-8'>$nationalite->libelle</td>";
+                echo"<td class='col-md-5'>$nationalite->libNation</td>";
+                echo"<td class='col-md-3'>$nationalite->libContinent</td>";
                 echo "<td class='col-md-2'> 
                     <a href='formNationalite.php?action=Modifier&num=$nationalite->num' class='btn btn-primary'><i class='fas fa-pen'></i></a>
                     <a href='#modalSuppression' data-toggle ='modal' data-message='Voulez-vous supprimer cette nationalité?' data-suppression='supprimerNationalite.php?num=$nationalite->num' class='btn btn-danger'><i class='far fa-trash-alt'></i></a>
