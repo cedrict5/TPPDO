@@ -67,7 +67,6 @@ $req=$monPdo->prepare("select * from nationalite");
 $req->setFetchMode(PDO::FETCH_OBJ);
 $req->execute();
 $lesNationnalites= $req->fetchAll();
-
 var_dump($_SESSION);
 ?>
 
