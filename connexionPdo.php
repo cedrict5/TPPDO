@@ -7,8 +7,8 @@
 </head>
 <body>
     <?php
-    
-    $hostnom = 'host=srvmysql.btssio.dedyn.io';
+    //$hostnom = 'host=srvmysql.btssio.dedyn.io';
+    $hostnom = 'host=btssio.dedyn.io';
     $usernom = 'TIANANO';
     $password = '05012006';
     $bdd = 'TIANANO_Biblio';
