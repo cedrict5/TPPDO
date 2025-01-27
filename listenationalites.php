@@ -94,20 +94,20 @@ if(!empty($_SESSION['message'])){
     <table class="table table-hover table-stripped">
         <thead>
             <tr class="d-flex">
-            <th scope="col" class="col-md-2">Numéro</th>
-            <th scope="col" class="col-md-8">Libellé</th>
-            <th scope="col" class="col-md-8">Continent</th>
-            <th scope="col" class="col-md-2">Actions</th>
+            <th scope="col" class="col-md-3">Numéro</th>
+            <th scope="col" class="col-md-3">Libellé</th>
+            <th scope="col" class="col-md-3">Continent</th>
+            <th scope="col" class="col-md-3">Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php 
             foreach($lesNationnalites as $nationalite){
                 echo"<tr class='d-flex'>";
-                echo"<td class='col-md-2'>$nationalite->num</td>";
-                echo"<td class='col-md-5'>$nationalite->libNation</td>";
+                echo"<td class='col-md-3'>$nationalite->num</td>";
+                echo"<td class='col-md-3'>$nationalite->libNation</td>";
                 echo"<td class='col-md-3'>$nationalite->libContinent</td>";
-                echo "<td class='col-md-2'> 
+                echo "<td class='col-md-3'> 
                     <a href='formNationalite.php?action=Modifier&num=$nationalite->num' class='btn btn-primary'><i class='fas fa-pen'></i></a>
                     <a href='#modalSuppression' data-toggle ='modal' data-message='Voulez-vous supprimer cette nationalité?' data-suppression='supprimerNationalite.php?num=$nationalite->num' class='btn btn-danger'><i class='far fa-trash-alt'></i></a>
                 </td>";
