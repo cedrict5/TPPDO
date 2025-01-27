@@ -57,16 +57,19 @@ include('connexionPdo.php');
 $action = $_GET['action'];
 $num=$_POST['num']; //recup le formulaire
 $libelle=$_POST['libelle']; //recup le formulaire
-var_dump($libelle,$num);
+$continent=$_POST['continent']; //recup le formulaire
+
 
 if ($action == "Modifier"){
-$req=$monPdo->prepare("update nationalite set libelle= :libelle where num = :num");
+$req=$monPdo->prepare("update nationalite set libelle = :libelle, numContinent = :continent where num = :num");
 $req->bindParam(':num', $num);
 $req->bindParam(':libelle', $libelle);
-$nb=$req->execute();
+$req->bindParam(':continent', $continent);
+
 }else{
-  $req=$monPdo->prepare("insert into nationalite(libelle) values(:libelle)");
+  $req=$monPdo->prepare("insert into nationalite(libelle, numContinent) values(:libelle, :continent)");
   $req->bindParam(':libelle', $libelle);
+  $req->bindParam(':continent', $continent);
 }
 $nb=$req->execute();
 $message = $action=="Modifier"? "modifiée":"ajoutée";
