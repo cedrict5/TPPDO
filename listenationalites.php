@@ -85,16 +85,33 @@ $lesNationnalites= $req->fetchAll();
                 echo"<td class='col-md-8'>$nationalite->libelle</td>";
                 echo "<td class='col-md-2'> 
                     <a href='formNationalite.php?action=Modifier&num=$nationalite->num' class='btn btn-primary'><i class='fas fa-pen'></i></a>
-                    <a href='supprimerNationalite.php?num=$nationalite->num' class='btn btn-danger'><i class='far fa-trash-alt'></i></a>
+                    <a href='#modalSuppression' data-toggle ='modal' class='btn btn-danger'><i class='far fa-trash-alt'></i></a>
                 </td>";
                 echo"</tr>";
-
+//supprimerNationalite.php?num=$nationalite->num
             }
 
             ?>
         
         </tbody>
 </table>
+</div>
+<div id="modalSuppression"class="modal"role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmation de suppression</h5>
+      </div>
+      <div class="modal-body">
+        <p>Voulez-vous supprimer cette nationalité?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="supprimerNationalite.php" class="btn btn-primary">Supprimer</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ne pas supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     
 
