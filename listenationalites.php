@@ -63,10 +63,27 @@
     
 <?php include('header.php');
 include('connexionPdo.php');
-$req=$monPdo->prepare("select n.num, n.libelle as 'libNation', c.libelle as 'libContinent' from nationalite n, continent c where n.numContinent=c.num order by n.libelle");
+//lst des nationalités
+
+
+//Constuction de la requête
+$texteReq="select n.num, n.libelle as 'libNation', c.libelle as 'libContinent' from nationalite n, continent c where n.numContinent=c.num";
+if(!empty($_GET)){
+  if($_GET['libelle'] !=""){$texteReq.= " and n.libelle like '%" .$_GET['libelle']."%'";}
+  if($_GET['continent'] !=""){$texteReq.= " and c.num =" .$_GET['continent'];}
+
+}
+$texteReq.= " order by n.libelle";
+$req=$monPdo->prepare($texteReq);
 $req->setFetchMode(PDO::FETCH_OBJ);
 $req->execute();
 $lesNationnalites= $req->fetchAll();
+
+$reqContinent=$monPdo->prepare("select * from continent");
+$reqContinent->setFetchMode(PDO::FETCH_OBJ);
+$reqContinent->execute();
+$lesContinents=$reqContinent->fetchAll();
+
 
 if(!empty($_SESSION['message'])){
   $mesMessages=$_SESSION['message'];
@@ -85,12 +102,36 @@ if(!empty($_SESSION['message'])){
 ?>
 
 
+
 <div class="containner mt-5">
 
     <div class="row pt-3">
-        <div class="col-9"><h2>Liste des nationnalités</h2></div>
+      <div class="col-9"><h2>Liste des nationnalités</h2></div>
         <div class="col-3"><a href="formNationalite.php?action=Ajouter" class="btn btn-success"><i class="fas fa-plus-circle"></i> Créer un nationnalité</a></div>
     </div>
+
+      <form action="" method="get" class="border border-primary rounded p-3 mt-3 nb-3">
+          <div class="row">
+            <div class="col">
+            <input type='text' class='form-control' id='libelle' placeholder='Saisir le libellé' name='libelle' value = '<?php if ($action == "Modifier") {echo $laNationalite->libelle;}?>'>
+            </div>
+            <div class="col">
+            <select name="continent">
+                    <?php 
+                    foreach($lesContinents as $continent){
+                      echo "<option value='$continent->num'>$continent->libelle</option>";
+                    }
+                    ?>
+                    <option value=""></option>
+                  </select>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-success btn-block" >Rechercher</button>
+            </div>
+          </div>
+        </form>
+      
+
     <table class="table table-hover table-stripped">
         <thead>
             <tr class="d-flex">
@@ -98,10 +139,10 @@ if(!empty($_SESSION['message'])){
             <th scope="col" class="col-md-3">Libellé</th>
             <th scope="col" class="col-md-3">Continent</th>
             <th scope="col" class="col-md-3">Actions</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
-            <?php 
+          <?php 
             foreach($lesNationnalites as $nationalite){
                 echo"<tr class='d-flex'>";
                 echo"<td class='col-md-3'>$nationalite->num</td>";

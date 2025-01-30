@@ -69,8 +69,6 @@ $reqContinent=$monPdo->prepare("select * from continent");
 $reqContinent->setFetchMode(PDO::FETCH_OBJ);
 $reqContinent->execute();
 $lesContinents=$reqContinent->fetchAll();
-var_dump($lesContinents);
-
 ?>
 
 
