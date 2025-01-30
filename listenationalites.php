@@ -77,6 +77,8 @@ if(!empty($_GET)){
 
 }
 $texteReq.= " order by n.libelle";
+echo var_dump($continent);
+
 $req=$monPdo->prepare($texteReq);
 $req->setFetchMode(PDO::FETCH_OBJ);
 $req->execute();
@@ -116,20 +118,19 @@ if(!empty($_SESSION['message'])){
       <form action="" method="get" class="border border-primary rounded p-3 mt-3 nb-3">
           <div class="row">
             <div class="col">
-            <input type='text' class='form-control' id='libelle' placeholder='Saisir le libellé' name='libelle' value = "<?php echo $libelle; ?> ">
-            </div>
-            <div class="col">
-            <select name="continent">
-                  <?php 
-                    echo "<option value='Tous'>Tous les continents</option>";
-                    foreach($lesContinents as $continent){
-                      $selection=$continent->num == $continentSel ? 'selected' : '';
-                      echo "<option value='$continent->num' $selection>$continent->libelle</option>";
-                    }
-                    ?>
-                    <option value=""></option>
+              <input type='text' class='form-control' id='libelle' placeholder='Saisir le libellé' name='libelle' value = "<?php echo $libelle; ?> ">
+              </div>
+              <div class="col">
+                <select name="continent" class="form-control">
+                      <?php 
+                        echo "<option value='Tous'>Tous les continents</option>";
+                        foreach($lesContinents as $continent){
+                          $selection=$continent->num == $continentSel ? 'selected' : '';
+                          echo "<option value='$continent->num' $selection>$continent->libelle</option>";
+                        }
+                        ?>
                   </select>
-            </div>
+              </div>
             <div class="col">
               <button type="submit" class="btn btn-success btn-block" >Rechercher</button>
             </div>
