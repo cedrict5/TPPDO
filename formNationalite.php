@@ -69,7 +69,7 @@ $reqContinent=$monPdo->prepare("select * from continent");
 $reqContinent->setFetchMode(PDO::FETCH_OBJ);
 $reqContinent->execute();
 $lesContinents=$reqContinent->fetchAll();
-
+var_dump($lesContinents);
 
 ?>
 
@@ -86,7 +86,7 @@ $lesContinents=$reqContinent->fetchAll();
             <select name="continent">
               <?php 
               foreach($lesContinents as $continent){
-                echo "<option value='.$continent->num'>$continent->libelle</option>";
+                echo "<option value='$continent->num'>$continent->libelle</option>";
               }
               ?>
               <option value=""></option>

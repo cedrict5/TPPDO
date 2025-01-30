@@ -58,7 +58,7 @@ $action = $_GET['action'];
 $num=$_POST['num']; //recup le formulaire
 $libelle=$_POST['libelle']; //recup le formulaire
 $continent=$_POST['continent']; //recup le formulaire
-
+var_dump($continent);
 
 if ($action == "Modifier"){
 $req=$monPdo->prepare("update nationalite set libelle = :libelle, numContinent = :continent where num = :num");
@@ -73,6 +73,7 @@ $req->bindParam(':continent', $continent);
 }
 $nb=$req->execute();
 $message = $action=="Modifier"? "modifiée":"ajoutée";
+//var_dump($continent);
 
 
 echo '<div class="container mt-5">';
