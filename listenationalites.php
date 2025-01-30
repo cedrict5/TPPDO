@@ -64,13 +64,16 @@
 <?php include('header.php');
 include('connexionPdo.php');
 //lst des nationalités
-
+$libelle="";
+$continent="Tous";
 
 //Constuction de la requête
 $texteReq="select n.num, n.libelle as 'libNation', c.libelle as 'libContinent' from nationalite n, continent c where n.numContinent=c.num";
 if(!empty($_GET)){
-  if($_GET['libelle'] !=""){$texteReq.= " and n.libelle like '%" .$_GET['libelle']."%'";}
-  if($_GET['continent'] !=""){$texteReq.= " and c.num =" .$_GET['continent'];}
+  $libelle=$_GET['libelle'];
+  $continentSel=$_GET['continent'];
+  if($libelle!=""){$texteReq.= " and n.libelle like '%" .$libelle."%'";}
+  if($continent!="Tous"){$texteReq.= " and c.num =" .$continent;}
 
 }
 $texteReq.= " order by n.libelle";
@@ -113,13 +116,15 @@ if(!empty($_SESSION['message'])){
       <form action="" method="get" class="border border-primary rounded p-3 mt-3 nb-3">
           <div class="row">
             <div class="col">
-            <input type='text' class='form-control' id='libelle' placeholder='Saisir le libellé' name='libelle' value = '<?php if ($action == "Modifier") {echo $laNationalite->libelle;}?>'>
+            <input type='text' class='form-control' id='libelle' placeholder='Saisir le libellé' name='libelle' value = "<?php echo $libelle; ?> ">
             </div>
             <div class="col">
             <select name="continent">
-                    <?php 
+                  <?php 
+                    echo "<option value='Tous'>Tous les continents</option>";
                     foreach($lesContinents as $continent){
-                      echo "<option value='$continent->num'>$continent->libelle</option>";
+                      $selection=$continent->num == $continentSel ? 'selected' : '';
+                      echo "<option value='$continent->num' $selection>$continent->libelle</option>";
                     }
                     ?>
                     <option value=""></option>
