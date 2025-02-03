@@ -72,8 +72,8 @@ $texteReq="select n.num, n.libelle as 'libNation', c.libelle as 'libContinent' f
 if(!empty($_GET)){
   $libelle=$_GET['libelle'];
   $continentSel=$_GET['continent'];
-  if($libelle!=""){$texteReq.= " and n.libelle like '%" .$libelle."%'";}
-  if($continent!="Tous"){$texteReq.= " and c.num =" .$continent;}
+  if($libelle!="") {$texteReq.= " and n.libelle like '%" .$libelle."%'";}
+  if($continentSel!="Tous") {$texteReq.= " and c.num =" .$continentSel;}
 
 }
 $texteReq.= " order by n.libelle";
@@ -84,6 +84,8 @@ $req->setFetchMode(PDO::FETCH_OBJ);
 $req->execute();
 $lesNationnalites= $req->fetchAll();
 
+
+//lst des continents
 $reqContinent=$monPdo->prepare("select * from continent");
 $reqContinent->setFetchMode(PDO::FETCH_OBJ);
 $reqContinent->execute();
